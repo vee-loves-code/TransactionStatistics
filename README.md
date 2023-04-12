@@ -2,12 +2,12 @@
 
 # A Seerbit Coding Assessment
 
-#How To Run The Project
+#  How To Run The Project
 Clone the project from this repo link
 
 https://github.com/vee-loves-code/TransactionStatistics
 
-#Clean, Run and Package a new Jar file using
+# Clean, Run and Package a new Jar file using
 
 mvn clean package
 
@@ -19,5 +19,5 @@ docker-compose up -d
   GET http://localhost:8080/statistics 
  DELETE http://localhost:8080/transaction 
  
-#Stop up the docker container using
+# Stop up the docker container using
 docker-compose down
