@@ -1,9 +1,8 @@
-package com.serbit.transaction.demo.controller;
+package com.example.transactiostatistics.controller;
 
+import com.example.transactiostatistics.payload.response.TransactionStatisticsResponse;
+import com.example.transactiostatistics.service.TransactionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.serbit.transaction.demo.dto.TransactionCreationRequest;
-import com.serbit.transaction.demo.dto.TransactionStatsDto;
-import com.serbit.transaction.demo.service.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,19 +13,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
@@ -61,9 +54,9 @@ public class TransactionControllerTest {
     @Test
     void testGetTransactionStats() throws Exception {
 
-        TransactionStatsDto stats = new TransactionStatsDto();
+        TransactionStatisticsResponse stats = new TransactionStatisticsResponse();
         stats.setSum(BigDecimal.valueOf(50));
-        stats.setAvg(BigDecimal.valueOf(30));
+        stats.setAverage(BigDecimal.valueOf(30));
         stats.setMax(BigDecimal.valueOf(50));
         stats.setMin(BigDecimal.valueOf(3));
         stats.setCount(6);

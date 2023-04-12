@@ -1,10 +1,10 @@
-package com.serbit.transaction.demo.service.impl;
+package com.example.transactiostatistics.serviceimpl;
 
-import com.serbit.transaction.demo.dto.TransactionCreationRequest;
-import com.serbit.transaction.demo.dto.TransactionStatsDto;
-import com.serbit.transaction.demo.model.Transaction;
-import com.serbit.transaction.demo.service.CacheService;
-import com.serbit.transaction.demo.service.TransactionService;
+import com.example.transactiostatistics.model.Transaction;
+import com.example.transactiostatistics.payload.request.TransactionRequest;
+import com.example.transactiostatistics.payload.response.TransactionStatisticsResponse;
+import com.example.transactiostatistics.service.CacheService;
+import com.example.transactiostatistics.service.TransactionService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -14,9 +14,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 
-/**
- * Created by David on 01 Apr, 2023
- **/
+
 @Service
 @Slf4j
 @AllArgsConstructor
@@ -27,7 +25,7 @@ public class TransactionServiceImpl implements TransactionService {
     private final CacheService cacheService;
 
     @Override
-    public void saveTransaction(TransactionCreationRequest request) {
+    public void saveTransaction(TransactionRequest request) {
 
         String uuId = UUID.randomUUID().toString();
         log.info("random uuid: {}", uuId);
@@ -38,29 +36,29 @@ public class TransactionServiceImpl implements TransactionService {
 
 
     @Override
-    public TransactionStatsDto getStats() {
+    public TransactionStatisticsResponse getStats() {
 
         Collection<Transaction> transactionCollection =  cacheService.getCache().asMap().values();
         Set<Transaction> transactions = new HashSet<>(transactionCollection);
 
-        // populate stats
-        TransactionStatsDto stats = new TransactionStatsDto();
-        stats.setSum(transactions.stream().map(Transaction::getAmount)
+        // populate the statistics
+        TransactionStatisticsResponse transactionStats = new TransactionStatisticsResponse();
+        transactionStats.setSum(transactions.stream().map(Transaction::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .setScale(2, RoundingMode.HALF_UP));
-        stats.setAvg(transactions.size() > 0 ?
-                stats.getSum().divide(new BigDecimal(transactions.size()), RoundingMode.HALF_UP )
+        transactionStats.setAverage(transactions.size() > 0 ?
+                transactionStats.getSum().divide(new BigDecimal(transactions.size()), RoundingMode.HALF_UP )
                         .setScale(2, RoundingMode.HALF_UP) :
                 BigDecimal.ZERO);
-        stats.setMax(transactions.stream().map(Transaction::getAmount)
+        transactionStats.setMax(transactions.stream().map(Transaction::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::max)
                 .setScale(2, RoundingMode.HALF_UP));
-        stats.setMin(transactions.stream().map(Transaction::getAmount)
+        transactionStats.setMin(transactions.stream().map(Transaction::getAmount)
                 .min(Comparator.naturalOrder())
                 .orElse(BigDecimal.ZERO)
                 .setScale(2, RoundingMode.HALF_UP));
-        stats.setCount(transactions.size());
-        return stats;
+        transactionStats.setCount(transactions.size());
+        return transactionStats;
     }
 
     @Override

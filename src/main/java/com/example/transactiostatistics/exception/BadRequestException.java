@@ -1,4 +1,4 @@
-package com.serbit.transaction.demo.exception;
+package com.example.transactiostatistics.exception;
 
 
 public class BadRequestException extends RuntimeException {

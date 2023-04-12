@@ -1,15 +1,13 @@
-package com.serbit.transaction.demo.config;
+package com.example.transactiostatistics.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Created by David on 01 Apr, 2023
- **/
+
 @Configuration
 public class AppConfig {
-
+//modelmapper to map the the transactionRequest object to Transaction class
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();

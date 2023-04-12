@@ -1,19 +1,19 @@
-# Read Me document
-* The application was built with spring-boot using Java version 8.
-* It encapsulates all aspects of the assessment as requested:
+
+* encapsulates all aspects of the assessment as requested:
+
 i. RESTFUL API's for transaction statistics.
-ii. Algorithims - This can be found in the AlgorithmSolutions.class (com.serbit.transaction.demo.algorithim)
+ii. Algorithims - This can be found in the AlgorithmSolutions.class 
 
 * units tests have been written for both parts of the assessment; while integration tests were written for just the 
   RESTFUL API'S section.
   
 * To run the application:
-i. mvn clean package
-ii. mvn spring-boot:run
+- mvn clean package
+- mvn spring-boot:run
 
   
 * To create a docker image of the application, run the following commands:
-i. mvn clean package
-ii. docker build -t seerbit-transaction-image .
+- mvn clean package
+- docker build -t seerbit-transaction-image .
 
 

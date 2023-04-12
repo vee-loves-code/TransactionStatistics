@@ -1,20 +1,15 @@
-package com.serbit.transaction.demo.service;
+package com.example.transactiostatistics.service;
 
-import com.serbit.transaction.demo.dto.TransactionCreationRequest;
-import com.serbit.transaction.demo.dto.TransactionStatsDto;
-import com.serbit.transaction.demo.model.Transaction;
 
-import java.util.Collection;
-import java.util.concurrent.ConcurrentMap;
+import com.example.transactiostatistics.payload.request.TransactionRequest;
+import com.example.transactiostatistics.payload.response.TransactionStatisticsResponse;
 
-/**
- * Created by David on 01 Apr, 2023
- **/
+
 public interface TransactionService {
 
-    void saveTransaction(TransactionCreationRequest request);
+    void saveTransaction(TransactionRequest request);
 
-    TransactionStatsDto getStats();
+    TransactionStatisticsResponse getStats();
 
     void deleteAllTransactions();
 }

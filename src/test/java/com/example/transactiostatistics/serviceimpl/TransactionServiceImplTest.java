@@ -1,10 +1,11 @@
-package com.serbit.transaction.demo.service.impl;
+package com.example.transactiostatistics.serviceimpl;
 
-import com.serbit.transaction.demo.dto.TransactionCreationRequest;
-import com.serbit.transaction.demo.dto.TransactionStatsDto;
-import com.serbit.transaction.demo.model.Transaction;
-import com.serbit.transaction.demo.service.CacheService;
-import com.serbit.transaction.demo.service.TransactionService;
+
+import com.example.transactiostatistics.model.Transaction;
+import com.example.transactiostatistics.payload.request.TransactionRequest;
+import com.example.transactiostatistics.payload.response.TransactionStatisticsResponse;
+import com.example.transactiostatistics.service.CacheService;
+import com.example.transactiostatistics.service.TransactionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,16 +27,10 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
-/**
- * Created by David on 02 Apr, 2023
- **/
+
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {TransactionServiceImpl.class, ModelMapper.class})
 class TransactionServiceImplTest {
@@ -76,7 +71,7 @@ class TransactionServiceImplTest {
 
     @Test
     void saveTransaction() {
-        TransactionCreationRequest req = new TransactionCreationRequest();
+        TransactionRequest req = new TransactionRequest();
         req.setAmount(BigDecimal.valueOf(200));
         req.setTimestamp(LocalDateTime.now());
 
@@ -93,9 +88,9 @@ class TransactionServiceImplTest {
         when(cacheService.getCache()).thenReturn(transactionCache);
 
         // validate transaction stats
-        TransactionStatsDto stats = transactionService.getStats();
+        TransactionStatisticsResponse stats = transactionService.getStats();
         assertThat(stats.getSum().doubleValue()).isEqualTo(95.00D);
-        assertThat(stats.getAvg().doubleValue()).isEqualTo(47.50D);
+        assertThat(stats.getAverage().doubleValue()).isEqualTo(47.50D);
         assertThat(stats.getMax().doubleValue()).isEqualTo(50D);
         assertThat(stats.getMin().doubleValue()).isEqualTo(45D);
         assertThat(stats.getCount()).isEqualTo(2L);

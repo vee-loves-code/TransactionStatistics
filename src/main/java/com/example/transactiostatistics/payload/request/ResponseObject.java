@@ -1,4 +1,4 @@
-package com.serbit.transaction.demo.dto;
+package com.example.transactiostatistics.payload.request;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
