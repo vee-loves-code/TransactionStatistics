@@ -14,6 +14,6 @@ ii. Algorithims - This can be found in the AlgorithmSolutions.class
   
 * To create a docker image of the application, run the following commands:
 - mvn clean package
-- docker build -t seerbit-transaction-image .
+- docker build -t TransactioStatistics-image .
 
 
