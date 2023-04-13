@@ -1,4 +1,3 @@
-
 # API Documentation for TransactionController:
 
 # POST /transactions
@@ -14,7 +13,8 @@ This API is used to add a new transaction.
 
 HTTP Status: 201 CREATED
 No Response Body
-GET /transactions
+
+# GET /transactions
 This API is used to fetch statistics of all transactions made in the last 60 seconds.
 
 # Response:
@@ -32,6 +32,7 @@ HTTP Status: 200 OK
 "count": 10
 }
 }
+
 # DELETE /transactions
 This API is used to delete all transactions.
 
@@ -41,7 +42,7 @@ HTTP Status: 204 NO CONTENT
 No Response Body
 Note:
 
-All timestamps should be in ISO 8601 format.
+All timestamps is in ISO 8601 format.
 
 * units tests have been written for both parts of the assessment; while integration tests were written for just the
 RESTFUL API'S section.
